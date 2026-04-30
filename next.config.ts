@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.dummyjson.com", // sesuaikan dengan linknya
       },
+      {
+        protocol: "https",
+        hostname: "ouiwqeyfrgyzftbnlhym.supabase.co", // sesuaikan dengan linknya
+      },
     ],
   },
 };

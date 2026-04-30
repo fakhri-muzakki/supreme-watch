@@ -12,6 +12,7 @@ import GoogleButton from "./GoogleButton";
 import { LoginSchema, type LoginData } from "../schema";
 import { createClient } from "@/lib/supabase/client";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,10 +29,11 @@ const LoginForm = () => {
 
   async function onSubmit(payload: LoginData) {
     setLoading(true);
-    console.log("==================================");
+
     try {
       const supabase = createClient();
       await supabase.auth.signInWithPassword(payload);
+      toast.success("Login successfully!");
       redirect("/");
     } finally {
       setLoading(false);
