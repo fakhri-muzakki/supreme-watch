@@ -1,4 +1,5 @@
 import CartSidebar from "@/components/CartSidebar";
+import LogoutButton from "@/features/auth/components/LogoutButton";
 import { Package, User } from "lucide-react";
 
 const Navbar = () => {
@@ -16,9 +17,7 @@ const Navbar = () => {
           <button className="rounded-full border border-border p-2 transition hover:bg-muted">
             <User className="h-4 w-4" />
           </button>
-          <button className="rounded-full border border-border px-4 py-2 text-sm font-medium transition hover:bg-muted">
-            Logout
-          </button>
+          <LogoutButton />
         </div>
       </div>
     </header>

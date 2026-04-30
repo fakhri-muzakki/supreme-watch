@@ -1,63 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { Minus, Plus, ShoppingCart, Trash2, X } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-
-import Watch1Image from "@/assets/images/watch-1.png";
-import Watch2Image from "@/assets/images/watch-2.png";
-import Watch3Image from "@/assets/images/watch-3.png";
-
-const initialCart = [
-  {
-    id: 1,
-    title: "Supreme Chronograph",
-    price: 299,
-    quantity: 1,
-    image: Watch1Image,
-  },
-  {
-    id: 2,
-    title: "Midnight Steel",
-    price: 349,
-    quantity: 2,
-    image: Watch2Image,
-  },
-  {
-    id: 3,
-    title: "Royal Silver",
-    price: 259,
-    quantity: 1,
-    image: Watch3Image,
-  },
-];
+import { useCartStore } from "@/features/cart/store/useCart";
+import { Minus, Plus, ShoppingCart, Trash2, X } from "lucide-react";
 
 export default function CartSidebar() {
   const [open, setOpen] = useState(false);
-  const [items, setItems] = useState(initialCart);
-
-  const increase = (id: number) => {
-    setItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
-      ),
-    );
-  };
-
-  const decrease = (id: number) => {
-    setItems((prev) =>
-      prev.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item,
-      ),
-    );
-  };
-
-  const removeItem = (id: number) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
-  };
+  const items = useCartStore((s) => s.items);
+  const increase = useCartStore((s) => s.increaseQty);
+  const decrease = useCartStore((s) => s.decreaseQty);
+  const remove = useCartStore((s) => s.removeItem);
+  // const [items, setItems] = useState(initialCart);
 
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -123,22 +78,24 @@ export default function CartSidebar() {
             items.map((item) => (
               <div key={item.id} className="rounded-2xl border p-4">
                 <div className="flex gap-4">
-                  <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-muted">
+                  <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-muted">
                     <Image
-                      src={item.image}
-                      alt={item.title}
-                      className="h-auto w-20 object-contain"
+                      src={item.image_url}
+                      width={80}
+                      height={80}
+                      alt={item.name}
+                      className="h-auto w-20 object-contain rounded-2xl"
                     />
                   </div>
 
                   <div className="flex flex-1 flex-col">
                     <div className="flex items-start justify-between gap-2">
                       <h3 className="font-semibold leading-tight">
-                        {item.title}
+                        {item.name}
                       </h3>
 
                       <button
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => remove(item.id)}
                         className="rounded-md p-1 text-muted-foreground hover:bg-muted"
                       >
                         <Trash2 className="h-4 w-4" />

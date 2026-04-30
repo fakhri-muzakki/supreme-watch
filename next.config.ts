@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com", // sesuaikan dengan linknya
       },
+      {
+        protocol: "https",
+        hostname: "cdn.dummyjson.com", // sesuaikan dengan linknya
+      },
     ],
   },
 };

@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import { redirect } from "next/navigation";
 
@@ -10,7 +9,14 @@ const LogoutButton = () => {
     await supabase.auth.signOut();
     redirect("/login");
   };
-  return <Button onClick={handleClick}>Logout</Button>;
+  return (
+    <button
+      onClick={handleClick}
+      className="rounded-full border border-border px-4 py-2 text-sm font-medium transition hover:bg-muted"
+    >
+      Logout
+    </button>
+  );
 };
 
 export default LogoutButton;
