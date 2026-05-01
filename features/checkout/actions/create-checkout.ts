@@ -31,16 +31,6 @@ export async function createCheckout(data: {
   const midtransOrderId = `ORDER-${Date.now()}`;
 
   // 2. create transaction ke midtrans (INI YANG KEMARIN KURANG)
-  //   const parameter = {
-  //   transaction_details: {
-  //     order_id: `ORDER-${Date.now()}`,
-  //     gross_amount: 150000,
-  //   },
-  //   customer_details: {
-  //     first_name: "Fakhri",
-  //     email: "fakhri@mail.com",
-  //   },
-  // };
   const parameter = {
     transaction_details: {
       order_id: midtransOrderId,

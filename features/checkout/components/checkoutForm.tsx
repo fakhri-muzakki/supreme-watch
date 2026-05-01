@@ -11,6 +11,7 @@ import { createCheckout } from "../actions/create-checkout";
 
 export default function CheckoutForm() {
   const items = useCartStore((s) => s.items);
+  const removeAllCarts = useCartStore((s) => s.removeAll);
 
   const total = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -26,8 +27,6 @@ export default function CheckoutForm() {
   });
 
   const onSubmit = async (values: CheckoutValues) => {
-    console.log("Checkout:", values, items);
-
     const res = await createCheckout({
       customer_name: values.customer_name,
       customer_email: values.customer_email,
@@ -37,6 +36,7 @@ export default function CheckoutForm() {
       total,
     });
 
+    removeAllCarts();
     window.snap.pay(res.token, {
       onSuccess: () => (window.location.href = "/orders"),
       onPending: () => (window.location.href = "/orders"),

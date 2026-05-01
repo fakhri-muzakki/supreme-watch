@@ -1,4 +1,7 @@
 import ProductsTable from "@/features/admin/products/components/ProductsTable";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Dashboard - Products" };
 
 export default function DashboardProductsPage() {
   return (

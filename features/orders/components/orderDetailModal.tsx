@@ -2,14 +2,30 @@
 
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import Image from "next/image";
+import type { Order, OrderItem } from "../type";
+import { Button } from "@/components/ui/button";
 
 export default function OrderDetailModal({
   order,
   onClose,
 }: {
-  order: any;
+  order: Order;
   onClose: () => void;
 }) {
+  const handlePay = () => {
+    window.snap.pay(order.midtrans_token, {
+      onSuccess: () => {
+        window.location.href = "/orders";
+      },
+      onPending: () => {
+        window.location.href = "/orders";
+      },
+      onError: () => {
+        alert("Payment failed");
+      },
+    });
+  };
+
   return (
     <Dialog open onOpenChange={onClose}>
       <DialogContent className="max-w-2xl">
@@ -19,7 +35,7 @@ export default function OrderDetailModal({
         {/* <h2 className="text-xl font-semibold mb-4">Order Detail</h2> */}
 
         <div className="space-y-4">
-          {order.order_items.map((item: any) => (
+          {order.order_items.map((item: OrderItem) => (
             <div key={item.id} className="flex gap-4 items-center">
               <Image
                 src={item.product_image}
@@ -55,6 +71,9 @@ export default function OrderDetailModal({
             <strong>Address:</strong> {order.shipping_address}
           </p>
         </div>
+        <Button className="w-full" onClick={handlePay}>
+          Pay
+        </Button>
       </DialogContent>
     </Dialog>
   );

@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import OrderList from "@/features/orders/components/orderList";
 import { redirect } from "next/navigation";
+import Script from "next/script";
 
 export default async function OrdersPage() {
   const supabase = await createClient();
@@ -36,6 +37,11 @@ export default async function OrdersPage() {
       </div>
 
       <OrderList orders={orders ?? []} />
+      <Script
+        src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
+        strategy="afterInteractive"
+      />
     </main>
   );
 }

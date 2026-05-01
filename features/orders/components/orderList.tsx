@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import OrderDetailModal from "./orderDetailModal";
 import { cancelOrder } from "../actions/cancelOrder";
 import OrderEmpty from "./OrderEmpty";
+import type { Order } from "../type";
+// import type { Order } from "./type";
 
-export default function OrderList({ orders }: { orders: any[] }) {
-  const [selected, setSelected] = useState<any | null>(null);
+export default function OrderList({ orders }: { orders: Order[] }) {
+  const [selected, setSelected] = useState<Order | null>(null);
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
   const handleCancel = async (id: string) => {
