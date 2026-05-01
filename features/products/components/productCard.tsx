@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/features/cart/store/useCart";
+import Link from "next/link";
 
 type Product = {
   id: string;
@@ -22,14 +23,17 @@ export default function ProductCard({ product }: { product: Product }) {
       "
     >
       {/* IMAGE */}
-      <div className="relative h-80 w-full overflow-hidden bg-muted">
+      <Link
+        href={`/products/${product.id}`}
+        className="relative h-80 w-full overflow-hidden bg-muted block"
+      >
         <Image
           src={product.image_url}
           alt={product.name}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-      </div>
+      </Link>
 
       {/* CONTENT */}
       <div className="space-y-3 p-5">

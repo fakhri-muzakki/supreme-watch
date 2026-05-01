@@ -19,8 +19,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
     }
 
-    // console.log("MIDTRANS WEBHOOK:", body);
-
     const orderId = body.order_id;
 
     if (!orderId) {

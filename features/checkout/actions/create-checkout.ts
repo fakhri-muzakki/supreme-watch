@@ -1,5 +1,6 @@
 "use server";
 
+import sendLowStockEmail from "@/features/admin/services/sendLowStockEmail";
 import { snap } from "@/lib/midtrans";
 import { createClient } from "@/lib/supabase/server";
 
@@ -29,6 +30,32 @@ export async function createCheckout(data: {
 
   // 1. generate order_id untuk midtrans
   const midtransOrderId = `ORDER-${Date.now()}`;
+
+  const productLowStock = [];
+  // 2. VALIDASI STOCK DULU
+  for (const item of data.items) {
+    const { data: product, error } = await supabase
+      .from("products")
+      .select("id, stock")
+      .eq("id", item.id)
+      .single();
+
+    if (error || !product) {
+      throw new Error(`Product not found: ${item.name}`);
+    }
+
+    if (product.stock < item.quantity) {
+      throw new Error(`Stock not enough for ${item.name}`);
+    }
+
+    if (product.stock <= 10) {
+      productLowStock.push({ name: item.name, stock: item.quantity });
+    }
+  }
+
+  if (productLowStock.length) {
+    sendLowStockEmail(productLowStock);
+  }
 
   // 2. create transaction ke midtrans (INI YANG KEMARIN KURANG)
   const parameter = {

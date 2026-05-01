@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/features/cart/store/useCart";
 import { Minus, Plus, ShoppingCart, Trash2, X } from "lucide-react";
+import { redirect } from "next/navigation";
 
 export default function CartSidebar() {
   const [open, setOpen] = useState(false);
@@ -18,6 +19,11 @@ export default function CartSidebar() {
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
+
+  const handlClick = (): void => {
+    setOpen(false);
+    redirect("/checkout");
+  };
 
   return (
     <>
@@ -145,7 +151,9 @@ export default function CartSidebar() {
             <span>${total}</span>
           </div>
 
-          <Button className="h-12 w-full rounded-full">Checkout</Button>
+          <Button className="h-12 w-full rounded-full" onClick={handlClick}>
+            Checkout
+          </Button>
         </div>
       </aside>
     </>
