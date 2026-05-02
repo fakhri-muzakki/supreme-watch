@@ -13,6 +13,7 @@ import { uploadImage } from "@/lib/uploadImage";
 import type { Product } from "@/types/product";
 import { createProduct, updateProduct } from "../product.service";
 import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 type Props = {
   open: boolean;
@@ -22,6 +23,7 @@ type Props = {
 
 export default function ProductDialog({ open, onClose, product }: Props) {
   const isEdit = !!product;
+  const queryClient = useQueryClient();
 
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -75,12 +77,8 @@ export default function ProductDialog({ open, onClose, product }: Props) {
   const onSubmit = async (values: ProductValues) => {
     try {
       let imageUrl = product?.image_url;
-
       const file = values.image?.[0];
-
-      if (file) {
-        imageUrl = await uploadImage(file);
-      }
+      if (file) imageUrl = await uploadImage(file);
 
       const payload = {
         name: values.name,
@@ -96,6 +94,8 @@ export default function ProductDialog({ open, onClose, product }: Props) {
         await createProduct(payload);
         toast.success("Created product successfully");
       }
+
+      await queryClient.invalidateQueries({ queryKey: ["admin-products"] });
 
       onClose();
     } catch (err) {

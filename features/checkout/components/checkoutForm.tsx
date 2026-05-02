@@ -60,6 +60,7 @@ export default function CheckoutForm() {
       }
     }
   };
+  console.log(items.length === 0);
 
   return (
     <>
@@ -118,8 +119,8 @@ export default function CheckoutForm() {
           <Button
             type="submit"
             size="lg"
-            className="w-full rounded-xl"
-            disabled={isSubmitting}
+            className="w-full rounded-xl disabled:cursor-not-allowed"
+            disabled={isSubmitting || items.length === 0}
           >
             {isSubmitting ? "Processing..." : "Continue to Payment"}
           </Button>
@@ -182,7 +183,7 @@ export default function CheckoutForm() {
 
           <button
             onClick={() => setErrorOpen(false)}
-            className="mt-4 w-full rounded-xl border px-4 py-2 text-sm"
+            className="mt-4 w-full rounded-xl border px-4 py-2 text-sm disabled:cursor-not-allowed"
           >
             OK
           </button>

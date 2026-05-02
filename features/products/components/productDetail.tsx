@@ -5,13 +5,52 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/features/cart/store/useCart";
 import type { Product } from "@/types/product";
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
+import { useEffect, useState } from "react";
+
+type ProductData = Product & { categories: { name: string } };
 
 export default function ProductDetail({
-  product,
+  product: productData,
 }: {
-  product: Product & { categories: { name: string } };
+  product: ProductData;
 }) {
+  const [product, setProduct] = useState<ProductData>(productData);
   const addToCart = useCartStore((s) => s.addToCart);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const channel = supabase
+      .channel("products")
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "products",
+        },
+        (payload) => {
+          console.log(payload.new);
+          // if (payload.eventType === "INSERT") {
+          //   setOrders((prev) => [...prev, payload.new as Order]);
+          // }
+
+          if (payload.eventType === "UPDATE") {
+            setProduct((prev) => ({ ...prev, stock: payload.new.stock }));
+          }
+
+          // if (payload.eventType === "DELETE") {
+          //   setOrders((prev) => prev.filter((o) => o.id !== payload.old.id));
+          // }
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   return (
     <div className="grid gap-12 md:grid-cols-2 pt-8">

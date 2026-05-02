@@ -1,9 +1,14 @@
 import { resend } from "@/lib/resend";
 
-export default async function sendTestEmail() {
+export default async function sendTestEmail(customerEmail: string) {
+  const targetEmail =
+    process.env.NODE_ENV === "development"
+      ? "fakhrimuzakki06@gmail.com"
+      : customerEmail;
+
   const data = await resend.emails.send({
     from: process.env.EMAIL_FROM!,
-    to: ["fakhrimuzakki06@gmail.com"],
+    to: [targetEmail],
     subject: "Order Confirmation - Mini Store",
     html: `
       <div style="font-family: Arial, sans-serif; background:#f9fafb; padding:20px;">

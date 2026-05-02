@@ -32,7 +32,12 @@ const LoginForm = () => {
 
     try {
       const supabase = createClient();
-      await supabase.auth.signInWithPassword(payload);
+      const result = await supabase.auth.signInWithPassword(payload);
+
+      if (result.error) {
+        toast.error("Incorrect email or password!");
+        return;
+      }
       toast.success("Login successfully!");
       redirect("/");
     } finally {

@@ -17,16 +17,18 @@ import ProductDialog from "./ProductDialog";
 import type { Product } from "@/types/product";
 import { createClient } from "@/lib/supabase/client";
 import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ProductsTable() {
   const [page, setPage] = useQueryState("page", { defaultValue: "1" });
   const [search] = useQueryState("search");
   const [sort] = useQueryState("sort");
   const [category] = useQueryState("category");
+  const queryClient = useQueryClient();
 
   const currentPage = Number(page);
 
-  const { data, isLoading, refetch } = useProducts({
+  const { data, isLoading } = useProducts({
     page: currentPage,
     search: search ?? undefined,
     sort: sort ?? undefined,
@@ -62,7 +64,7 @@ export default function ProductsTable() {
 
       toast.success("Deleted product successfully");
       // refresh data setelah delete sukses
-      refetch();
+      await queryClient.invalidateQueries({ queryKey: ["admin-products"] });
     } catch (err) {
       console.error("Delete product failed:", err);
       alert("Gagal menghapus product");

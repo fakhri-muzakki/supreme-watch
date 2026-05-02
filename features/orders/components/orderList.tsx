@@ -1,14 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import OrderDetailModal from "./orderDetailModal";
 import { cancelOrder } from "../actions/cancelOrder";
 import OrderEmpty from "./OrderEmpty";
 import type { Order } from "../type";
+import { createClient } from "@/lib/supabase/client";
 // import type { Order } from "./type";
 
-export default function OrderList({ orders }: { orders: Order[] }) {
+export default function OrderList({
+  orders: initialData,
+}: {
+  orders: Order[];
+}) {
+  const [orders, setOrders] = useState<Order[]>(initialData);
+
   const [selected, setSelected] = useState<Order | null>(null);
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
@@ -18,6 +25,44 @@ export default function OrderList({ orders }: { orders: Order[] }) {
     setLoadingId(null);
     location.reload(); // simple refresh (nanti bisa optimize)
   };
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const channel = supabase
+      .channel("orders")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "orders",
+        },
+        (payload) => {
+          console.log(payload.new);
+          if (payload.eventType === "INSERT") {
+            setOrders((prev) => [...prev, payload.new as Order]);
+          }
+
+          if (payload.eventType === "UPDATE") {
+            setOrders((prev) =>
+              prev.map((o) =>
+                o.id === payload.new.id ? (payload.new as Order) : o,
+              ),
+            );
+          }
+
+          if (payload.eventType === "DELETE") {
+            setOrders((prev) => prev.filter((o) => o.id !== payload.old.id));
+          }
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   return (
     <>

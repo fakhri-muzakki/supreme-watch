@@ -19,6 +19,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
     }
 
+    console.log(JSON.stringify(body));
+
     const orderId = body.order_id;
 
     if (!orderId) {
@@ -147,7 +149,7 @@ export async function POST(req: NextRequest) {
     // ================================
     // 8. Send email
     // ================================
-    await sendTestEmail();
+    await sendTestEmail(body.customer_details.email);
 
     // ================================
     // DONE

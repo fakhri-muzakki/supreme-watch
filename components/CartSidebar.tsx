@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/features/cart/store/useCart";
 import { Minus, Plus, ShoppingCart, Trash2, X } from "lucide-react";
 import { redirect } from "next/navigation";
+import EmptyCart from "./EmptyCart";
 
 export default function CartSidebar() {
   const [open, setOpen] = useState(false);
@@ -77,9 +78,7 @@ export default function CartSidebar() {
         {/* ITEMS */}
         <div className="flex-1 space-y-4 overflow-y-auto px-6 py-5 scrollbar-hide">
           {items.length === 0 ? (
-            <div className="pt-20 text-center text-muted-foreground">
-              Cart is empty
-            </div>
+            <EmptyCart />
           ) : (
             items.map((item) => (
               <div key={item.id} className="rounded-2xl border p-4">
