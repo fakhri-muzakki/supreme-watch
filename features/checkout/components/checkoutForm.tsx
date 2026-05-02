@@ -145,17 +145,17 @@ export default function CheckoutForm() {
                   <p className="text-sm font-medium">{item.name}</p>
                   <p className="text-xs text-muted-foreground">
                     {item.quantity} ×{" "}
-                    {new Intl.NumberFormat("en-US", {
+                    {new Intl.NumberFormat("id-ID", {
                       style: "currency",
-                      currency: "USD",
+                      currency: "IDR",
                     }).format(item.price)}
                   </p>
                 </div>
 
                 <p className="text-sm font-medium">
-                  {new Intl.NumberFormat("en-US", {
+                  {new Intl.NumberFormat("id-ID", {
                     style: "currency",
-                    currency: "USD",
+                    currency: "IDR",
                   }).format(item.price * item.quantity)}
                 </p>
               </div>
@@ -165,9 +165,9 @@ export default function CheckoutForm() {
           <div className="flex justify-between border-t pt-4 text-lg font-semibold">
             <span>Total</span>
             <span>
-              {new Intl.NumberFormat("en-US", {
+              {new Intl.NumberFormat("id-ID", {
                 style: "currency",
-                currency: "USD",
+                currency: "IDR",
               }).format(total)}
             </span>
           </div>

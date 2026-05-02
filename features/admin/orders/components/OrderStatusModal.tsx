@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { updateOrderStatus } from "../order.service";
 import type { Order } from "../order";
-// import { updateOrderStatus } from "../services/orders.service";
 
 const statuses = [
   "pending",

@@ -7,7 +7,6 @@ import { cancelOrder } from "../actions/cancelOrder";
 import OrderEmpty from "./OrderEmpty";
 import type { Order } from "../type";
 import { createClient } from "@/lib/supabase/client";
-// import type { Order } from "./type";
 
 export default function OrderList({
   orders: initialData,
@@ -23,7 +22,7 @@ export default function OrderList({
     setLoadingId(id);
     await cancelOrder(id);
     setLoadingId(null);
-    location.reload(); // simple refresh (nanti bisa optimize)
+    location.reload();
   };
 
   useEffect(() => {
@@ -80,7 +79,7 @@ export default function OrderList({
                 </p>
 
                 <p className="mt-1 text-lg font-medium">
-                  ${order.total_amount}
+                  Rp. {order.total_amount}
                 </p>
 
                 <p className="text-sm text-muted-foreground capitalize">

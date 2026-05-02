@@ -28,11 +28,10 @@ export async function createCheckout(data: {
     throw new Error("Error");
   }
 
-  // 1. generate order_id untuk midtrans
   const midtransOrderId = `ORDER-${Date.now()}`;
 
   const productLowStock = [];
-  // 2. VALIDASI STOCK DULU
+  // VALIDASI STOCK DULU
   for (const item of data.items) {
     const { data: product, error } = await supabase
       .from("products")
@@ -57,7 +56,7 @@ export async function createCheckout(data: {
     sendLowStockEmail(productLowStock);
   }
 
-  // 2. create transaction ke midtrans (INI YANG KEMARIN KURANG)
+  // create transaction ke midtrans
   const parameter = {
     transaction_details: {
       order_id: midtransOrderId,
@@ -72,11 +71,11 @@ export async function createCheckout(data: {
 
   const transaction = await snap.createTransaction(parameter);
 
-  // 3. simpan order ke DB
+  //  simpan order ke DB
   const { data: order, error: orderError } = await supabase
     .from("orders")
     .insert({
-      user_id: user.id, // nanti ambil dari auth
+      user_id: user.id,
       status: "pending",
       total_amount: data.total,
 
@@ -93,7 +92,7 @@ export async function createCheckout(data: {
 
   if (orderError) throw new Error(orderError.message);
 
-  // 4. insert order_items
+  // insert order_items
   const orderItems = data.items.map((item) => ({
     order_id: order.id,
     product_id: item.id,

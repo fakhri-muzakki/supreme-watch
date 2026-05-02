@@ -13,64 +13,13 @@ export interface Product {
   image_url: string;
 }
 
-// const products = [
-//   {
-//     id: 1,
-//     name: "Midnight Steel",
-//     description: "Bold stainless chronograph.",
-//     price: "$299",
-//     image_url:
-//       "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=900",
-//   },
-//   {
-//     id: 2,
-//     name: "Royal Black",
-//     description: "Luxury matte black edition.",
-//     price: "$349",
-//     image_url:
-//       "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=900",
-//   },
-//   {
-//     id: 3,
-//     name: "Silver Elite",
-//     description: "Elegant timeless silver tone.",
-//     price: "$279",
-//     image_url:
-//       "https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?q=80&w=900",
-//   },
-//   {
-//     id: 4,
-//     name: "Ocean Blue",
-//     description: "Modern marine inspired watch.",
-//     price: "$319",
-//     image_url:
-//       "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?q=80&w=900",
-//   },
-// ];
-
 export default function FeaturedSlider({ products }: { products: Product[] }) {
-  // const [products, setProducts] = useState<Product[]>([]);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
   });
 
   const [selected, setSelected] = useState(0);
-
-  // useEffect(() => {
-  //   const getData = async (): Promise<void> => {
-  //     const supabase = createClient();
-  //     const { data } = await supabase
-  //       .from("products_with_sales")
-  //       .select("*")
-  //       .limit(4)
-  //       .order("total_sold", { ascending: false });
-
-  //     setProducts(data ?? []);
-  //   };
-
-  //   getData();
-  // }, []);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -91,7 +40,7 @@ export default function FeaturedSlider({ products }: { products: Product[] }) {
         <h2 className="mt-2 text-4xl font-semibold">Crafted For Presence</h2>
       </div>
 
-      {/* Slider — hanya image, tanpa card wrapper */}
+      {/* Slider — cuma image, tanpa card wrapper */}
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {products.slice(0, 4).map((item, index) => {

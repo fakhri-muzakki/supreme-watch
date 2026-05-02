@@ -8,7 +8,6 @@ export default function TanSTackQueryProvider({
 }: {
   children: React.ReactNode;
 }) {
-  // ✅ penting: pakai useState biar tidak recreate setiap render
   const [queryClient] = useState(() => new QueryClient());
 
   return (

@@ -51,9 +51,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "DB error" }, { status: 500 });
     }
 
-    // ================================
-    // ⚠️ IMPORTANT: HANDLE TEST WEBHOOK
-    // ================================
+    // Untuk handle midtrans test
     if (!order) {
       console.warn("Order not found (likely test webhook):", orderId);
 

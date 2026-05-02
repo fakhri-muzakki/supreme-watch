@@ -48,11 +48,11 @@ export default function OrderDetailModal({
               <div className="flex-1">
                 <p className="font-medium">{item.product_name}</p>
                 <p className="text-sm text-muted-foreground">
-                  {item.quantity} × ${item.price_snapshot}
+                  Rp. {item.price_snapshot} × {item.quantity}
                 </p>
               </div>
 
-              <p className="font-medium">${item.subtotal}</p>
+              <p className="font-medium">Rp. {item.subtotal}</p>
             </div>
           ))}
         </div>

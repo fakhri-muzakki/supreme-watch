@@ -4,7 +4,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export type CartItem = {
-  id: string; // ⚠️ pakai string (uuid dari DB)
+  id: string;
   name: string;
   price: number;
   quantity: number;
@@ -28,7 +28,7 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      // ➕ ADD TO CART
+      // ADD TO CART
       addToCart: (item) => {
         const existing = get().items.find((i) => i.id === item.id);
 
@@ -45,7 +45,7 @@ export const useCartStore = create<CartState>()(
         }
       },
 
-      // ➕ INCREASE
+      // INCREASE
       increaseQty: (id) => {
         set({
           items: get().items.map((i) =>
@@ -54,7 +54,7 @@ export const useCartStore = create<CartState>()(
         });
       },
 
-      // ➖ DECREASE
+      // DECREASE
       decreaseQty: (id) => {
         set({
           items: get()
@@ -65,7 +65,7 @@ export const useCartStore = create<CartState>()(
         });
       },
 
-      // ❌ REMOVE
+      // REMOVE
       removeItem: (id) => {
         set({
           items: get().items.filter((i) => i.id !== id),
@@ -78,11 +78,11 @@ export const useCartStore = create<CartState>()(
         });
       },
 
-      // 🧹 CLEAR
+      //  hapus semua cart
       clearCart: () => set({ items: [] }),
     }),
     {
-      name: "cart-storage", // key di localStorage
+      name: "cart-storage",
     },
   ),
 );

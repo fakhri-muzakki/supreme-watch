@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { getOrders } from "../order.service";
-// import { getOrders } from "../services/orders.service";
 
 export function useOrders(params: {
   page: number;

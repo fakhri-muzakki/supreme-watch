@@ -14,7 +14,6 @@ export type RegisterData = z.infer<typeof RegisterSchema>;
 
 // Login
 export const LoginSchema = z.object({
-  // full_name: z.string().min(2, "Full name minimal 2 karakter"),
   email: z
     .string()
     .min(1, "Email wajib diisi")

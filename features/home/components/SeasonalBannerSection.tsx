@@ -50,15 +50,8 @@ export default function SeasonalBannerSection() {
 
               {/* BUTTONS */}
               <div className="grid grid-cols-2 gap-3">
-                {/* <Button
-                  variant="outline"
-                  className="rounded-full border-white bg-white/10 text-white backdrop-blur hover:bg-white hover:text-black"
-                >
-                  Shop Men
-                </Button> */}
                 <Link
                   href={"/products?category=mens-watches"}
-                  // variant="outline"
                   className={buttonVariants({
                     variant: "outline",
                     className:
@@ -73,7 +66,6 @@ export default function SeasonalBannerSection() {
 
                 <Link
                   href={"/products?category=womens-watches"}
-                  // variant="outline"
                   className={buttonVariants({
                     variant: "outline",
                     className:
@@ -85,13 +77,6 @@ export default function SeasonalBannerSection() {
                 >
                   Shop Women
                 </Link>
-
-                {/* <Link
-                  variant="outline"
-                  className="rounded-full border-white bg-white/10 text-white backdrop-blur hover:bg-white hover:text-black"
-                >
-                  Shop Women
-                </Link> */}
               </div>
             </div>
           </div>

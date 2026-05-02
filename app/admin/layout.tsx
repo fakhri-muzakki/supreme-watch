@@ -1,5 +1,5 @@
-// import { createClient } from "@/lib/supabase/server";
-// import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 import DashboardSidebar from "@/features/admin/components/DashboardSidebar";
 
@@ -8,14 +8,22 @@ export default async function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  //   const supabase = await createClient();
+  const supabase = await createClient();
 
-  //   const {
-  //     data: { user },
-  //   } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  //   if (!user) redirect("/login");
-  //   if (user.role !== "admin") redirect("/");
+  if (!user) redirect("/login");
+
+  // ambil role dari profiles, kalo dari cookie itu beda (user.role)
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  if (profile?.role !== "admin") redirect("/");
 
   return (
     <div className="flex min-h-screen bg-background">

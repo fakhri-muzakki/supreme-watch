@@ -14,7 +14,6 @@ export default function CartSidebar() {
   const increase = useCartStore((s) => s.increaseQty);
   const decrease = useCartStore((s) => s.decreaseQty);
   const remove = useCartStore((s) => s.removeItem);
-  // const [items, setItems] = useState(initialCart);
 
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -46,7 +45,6 @@ export default function CartSidebar() {
             {items.length}
           </span>
         )}
-        {/* Cart ({items.length}) */}
       </button>
 
       {/* SIDEBAR */}
@@ -108,7 +106,7 @@ export default function CartSidebar() {
                     </div>
 
                     <p className="mt-1 text-sm text-muted-foreground">
-                      ${item.price}
+                      RP. {item.price}
                     </p>
 
                     <div className="mt-auto flex items-center justify-between pt-4">
@@ -133,7 +131,7 @@ export default function CartSidebar() {
                       </div>
 
                       <span className="font-semibold">
-                        ${item.price * item.quantity}
+                        Rp. {item.price * item.quantity}
                       </span>
                     </div>
                   </div>
@@ -147,7 +145,7 @@ export default function CartSidebar() {
         <div className="space-y-4 border-t px-6 py-5">
           <div className="flex items-center justify-between text-lg font-semibold">
             <span>Total</span>
-            <span>${total}</span>
+            <span>Rp. {total}</span>
           </div>
 
           <Button className="h-12 w-full rounded-full" onClick={handlClick}>

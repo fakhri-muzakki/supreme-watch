@@ -14,6 +14,7 @@ import type { Product } from "@/types/product";
 import { createProduct, updateProduct } from "../product.service";
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
+import Image from "next/image";
 
 type Props = {
   open: boolean;
@@ -40,7 +41,7 @@ export default function ProductDialog({ open, onClose, product }: Props) {
 
   const imageWatch = watch("image");
 
-  // 🔥 handle preview
+  //  handle preview
   useEffect(() => {
     if (imageWatch && imageWatch.length > 0) {
       const file = imageWatch[0];
@@ -51,7 +52,7 @@ export default function ProductDialog({ open, onClose, product }: Props) {
     }
   }, [imageWatch]);
 
-  // 🔥 reset form
+  // reset form
   useEffect(() => {
     if (product) {
       reset({
@@ -158,9 +159,12 @@ export default function ProductDialog({ open, onClose, product }: Props) {
 
             {/* PREVIEW */}
             {preview && (
-              <img
+              <Image
                 src={preview}
                 alt="preview"
+                width={128}
+                height={128}
+                unoptimized
                 className="h-32 w-32 object-cover rounded-xl border"
               />
             )}

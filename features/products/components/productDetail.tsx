@@ -31,18 +31,9 @@ export default function ProductDetail({
           table: "products",
         },
         (payload) => {
-          console.log(payload.new);
-          // if (payload.eventType === "INSERT") {
-          //   setOrders((prev) => [...prev, payload.new as Order]);
-          // }
-
           if (payload.eventType === "UPDATE") {
             setProduct((prev) => ({ ...prev, stock: payload.new.stock }));
           }
-
-          // if (payload.eventType === "DELETE") {
-          //   setOrders((prev) => prev.filter((o) => o.id !== payload.old.id));
-          // }
         },
       )
       .subscribe();
