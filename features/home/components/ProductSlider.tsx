@@ -4,75 +4,19 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { useCartStore } from "@/features/cart/store/useCart";
 
-const products = [
-  {
-    id: 1,
-    title: "Midnight Steel",
-    desc: "Bold stainless chronograph.",
-    price: "$299",
-    image:
-      "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=900",
-  },
-  {
-    id: 2,
-    title: "Royal Black",
-    desc: "Luxury matte black edition.",
-    price: "$349",
-    image:
-      "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=900",
-  },
-  {
-    id: 3,
-    title: "Silver Elite",
-    desc: "Elegant timeless silver tone.",
-    price: "$279",
-    image:
-      "https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?q=80&w=900",
-  },
-  {
-    id: 4,
-    title: "Ocean Blue",
-    desc: "Modern marine inspired watch.",
-    price: "$319",
-    image:
-      "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?q=80&w=900",
-  },
-  {
-    id: 5,
-    title: "Rose Gold",
-    desc: "Refined rose gold elegance.",
-    price: "$389",
-    image:
-      "https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=900",
-  },
-  {
-    id: 6,
-    title: "Carbon Black",
-    desc: "Ultralight carbon fiber case.",
-    price: "$419",
-    image:
-      "https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=900",
-  },
-  {
-    id: 7,
-    title: "Classic White",
-    desc: "Minimalist white dial design.",
-    price: "$259",
-    image:
-      "https://images.unsplash.com/photo-1587925358603-c2eea5305bbc?q=80&w=900",
-  },
-  {
-    id: 8,
-    title: "Bronze Vintage",
-    desc: "Heritage-inspired bronze finish.",
-    price: "$339",
-    image:
-      "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=900",
-  },
-];
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image_url: string;
+}
 
-export default function ProductSlider() {
+export default function ProductSlider({ products }: { products: Product[] }) {
+  const addToCart = useCartStore((s) => s.addToCart);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
@@ -119,19 +63,28 @@ export default function ProductSlider() {
             >
               <div className="rounded-2xl border border-border bg-card overflow-hidden">
                 {/* Image */}
-                <img
-                  src={item.image}
-                  alt={item.title}
+
+                <Image
+                  src={item.image_url}
+                  alt={item.name}
+                  width={293}
+                  height={224}
                   className="h-56 w-full object-cover"
                 />
 
                 {/* Info */}
                 <div className="p-4 space-y-2">
-                  <h3 className="font-semibold text-base">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  <h3 className="font-semibold text-base">{item.name}</h3>
+                  <p className="text-sm text-muted-foreground line-clamp-1">
+                    {item.description}
+                  </p>
                   <div className="flex items-center justify-between pt-1">
-                    <span className="font-bold">{item.price}</span>
-                    <Button size="sm" className="rounded-full px-4 text-xs">
+                    <span className="font-bold">RP. {item.price}</span>
+                    <Button
+                      size="sm"
+                      className="rounded-full px-4 text-xs"
+                      onClick={() => addToCart(item)}
+                    >
                       Add to Cart
                     </Button>
                   </div>

@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 
 const cards = [
   {
@@ -49,19 +50,48 @@ export default function SeasonalBannerSection() {
 
               {/* BUTTONS */}
               <div className="grid grid-cols-2 gap-3">
-                <Button
+                {/* <Button
                   variant="outline"
                   className="rounded-full border-white bg-white/10 text-white backdrop-blur hover:bg-white hover:text-black"
                 >
                   Shop Men
-                </Button>
+                </Button> */}
+                <Link
+                  href={"/products?category=mens-watches"}
+                  // variant="outline"
+                  className={buttonVariants({
+                    variant: "outline",
+                    className:
+                      "rounded-full border-white bg-white/10 text-white backdrop-blur hover:bg-white hover:text-black",
+                  })}
+                  style={{
+                    borderRadius: "20px",
+                  }}
+                >
+                  Shop Men
+                </Link>
 
-                <Button
+                <Link
+                  href={"/products?category=womens-watches"}
+                  // variant="outline"
+                  className={buttonVariants({
+                    variant: "outline",
+                    className:
+                      "rounded-full border-white bg-white/10 text-white backdrop-blur hover:bg-white hover:text-black",
+                  })}
+                  style={{
+                    borderRadius: "20px",
+                  }}
+                >
+                  Shop Women
+                </Link>
+
+                {/* <Link
                   variant="outline"
                   className="rounded-full border-white bg-white/10 text-white backdrop-blur hover:bg-white hover:text-black"
                 >
                   Shop Women
-                </Button>
+                </Link> */}
               </div>
             </div>
           </div>

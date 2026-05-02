@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function PromoGridSection() {
   return (
@@ -31,7 +32,9 @@ export default function PromoGridSection() {
               Discover refined precision crafted for modern presence.
             </p>
 
-            <Button className="mt-8 rounded-full px-8">Shop Now</Button>
+            <Link href={"/products"}>
+              <Button className="mt-8 rounded-full px-8">Shop Now</Button>
+            </Link>
           </div>
         </div>
 

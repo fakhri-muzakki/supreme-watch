@@ -9,6 +9,7 @@ export async function middleware(request: NextRequest) {
 
   const {
     data: { user },
+    error: authError,
   } = await supabase.auth.getUser();
 
   const pathname = request.nextUrl.pathname;
@@ -24,6 +25,12 @@ export async function middleware(request: NextRequest) {
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route),
   );
+  if (authError && isProtectedRoute) {
+    if (authError.message.includes("JWT")) {
+      await supabase.auth.signOut();
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
 
   // Sudah login tapi buka login/register
   if (user && isGuestRoute) {

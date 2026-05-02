@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
 import FeaturedSlider from "@/features/home/components/FeaturedSlider";
 import PromoGridSection from "@/features/home/components/PromoGridSection";
@@ -7,8 +7,17 @@ import SeasonalBannerSection from "@/features/home/components/SeasonalBannerSect
 import Footer from "@/features/home/components/Footer";
 import Navbar from "@/features/home/components/Navbar";
 import CollectionCardsSection from "@/features/home/components/CollectionCardsSection";
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
 
-export default function SupremeWatchHomePage() {
+export default async function SupremeWatchHomePage() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("products_with_sales")
+    .select("*")
+    .limit(8)
+    .order("total_sold", { ascending: false });
+
   return (
     <main className="min-h-screen bg-background p-3 md:p-4">
       <div className="mx-auto max-w-7xl space-y-4 pt-20">
@@ -40,12 +49,32 @@ export default function SupremeWatchHomePage() {
                   The New Supreme Collection
                 </h1>
                 <div className="flex flex-wrap gap-3">
-                  <Button className="rounded-full bg-white px-6 text-black hover:bg-white/90">
+                  <Link
+                    href={"/products?category=mens-watches"}
+                    className={buttonVariants({
+                      variant: "ghost",
+                      className:
+                        "rounded-full bg-white px-6 text-black hover:bg-white/90",
+                    })}
+                    style={{
+                      borderRadius: "20rem",
+                    }}
+                  >
                     Shop Men
-                  </Button>
-                  <Button className="rounded-full bg-white px-6 text-black hover:bg-white/90">
+                  </Link>
+                  <Link
+                    href={"/products?category=womens-watches"}
+                    className={buttonVariants({
+                      variant: "ghost",
+                      className:
+                        "rounded-full bg-white px-6 text-black hover:bg-white/90",
+                    })}
+                    style={{
+                      borderRadius: "20rem",
+                    }}
+                  >
                     Shop Women
-                  </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -54,9 +83,9 @@ export default function SupremeWatchHomePage() {
 
         <CollectionCardsSection />
 
-        <FeaturedSlider />
+        <FeaturedSlider products={data || []} />
         <PromoGridSection />
-        <ProductSlider />
+        <ProductSlider products={data || []} />
         <SeasonalBannerSection />
         <Footer />
       </div>
