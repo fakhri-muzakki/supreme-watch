@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/ModeToggle";
 import { Toaster } from "react-hot-toast";
 import { NuqsAdapter } from "nuqs/adapters/next";
 import TanSTackQueryProvider from "@/components/providers/QueryClientProvider";
@@ -30,44 +28,36 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${jakarta.variable} ${cormorant.variable} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NuqsAdapter>
-            <TanSTackQueryProvider>{children}</TanSTackQueryProvider>
-          </NuqsAdapter>
-          <ModeToggle />
-          <Toaster
-            position="top-right"
-            reverseOrder={false}
-            gutter={8}
-            containerClassName=""
-            containerStyle={{}}
-            toasterId="default"
-            toastOptions={{
-              // Define default options
-              className: "",
-              duration: 5000,
-              removeDelay: 1000,
-              style: {
-                background: "#363636",
-                color: "#fff",
-              },
+        <NuqsAdapter>
+          <TanSTackQueryProvider>{children}</TanSTackQueryProvider>
+        </NuqsAdapter>
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+          gutter={8}
+          containerClassName=""
+          containerStyle={{}}
+          toasterId="default"
+          toastOptions={{
+            // Define default options
+            className: "",
+            duration: 5000,
+            removeDelay: 1000,
+            style: {
+              background: "#363636",
+              color: "#fff",
+            },
 
-              // Default options for specific types
-              success: {
-                duration: 3000,
-                iconTheme: {
-                  primary: "green",
-                  secondary: "black",
-                },
+            // Default options for specific types
+            success: {
+              duration: 3000,
+              iconTheme: {
+                primary: "green",
+                secondary: "black",
               },
-            }}
-          />
-        </ThemeProvider>
+            },
+          }}
+        />
       </body>
     </html>
   );
