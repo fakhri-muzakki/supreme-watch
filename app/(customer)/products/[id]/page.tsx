@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import ProductDetail from "@/features/products/components/productDetail";
+import ProductDetail from "@/features/products/components/ProductDetail";
 import { notFound } from "next/navigation";
 
 export default async function ProductDetailPage({

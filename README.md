@@ -1,36 +1,186 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Supreme Watch – Real-Time E-Commerce (Next.js + Supabase)
 
-## Getting Started
+![Preview](./public/preview.png)
 
-First, run the development server:
+## 🚀 Overview
+
+Supreme Watch adalah aplikasi **full-stack e-commerce** dengan fitur **real-time inventory & order updates** serta **payment gateway integration**.
+
+Project ini dirancang sebagai **portfolio piece dalam 5 hari** untuk menunjukkan kemampuan membangun aplikasi production-ready dengan kompleksitas nyata (bukan sekadar CRUD).
+
+---
+
+## 🎯 Goals
+
+### Product Goals
+
+- Membuat mini e-commerce dengan:
+  - Real-time stock updates
+  - Real-time order tracking
+  - Secure payment integration
+
+### User Goals
+
+- Browse produk dengan update stok realtime
+- Add to cart & checkout dengan mudah
+- Pembayaran aman (Midtrans)
+- Tracking status order secara realtime
+- Admin dapat mengelola produk & order
+
+### Success Metrics
+
+- ⚡ Real-time update tanpa refresh
+- 💳 Payment success rate > 95%
+- ⏱️ Checkout < 2 menit
+- 🚀 Page load < 2 detik
+
+---
+
+## 💼 Business Objectives
+
+- Showcase **Full-Stack Skills**
+- Demonstrate **Real-Time Systems**
+- Implement **Production Payment Flow**
+- Build **Portfolio Differentiator**
+
+### Why This Project Matters?
+
+- E-commerce = kompleks (state, transaksi, async flow)
+- Payment gateway = real-world skill
+- Real-time = advanced engineering value
+- Highly attractive for recruiters
+
+---
+
+## 🧩 Tech Stack
+
+### Frontend
+
+- Next.js (App Router)
+- Tailwind CSS + shadcn/ui
+- Zustand (state management)
+- React Hook Form + Zod
+
+### Backend & Realtime
+
+- Supabase (PostgreSQL)
+- Supabase Realtime (WebSocket)
+- Supabase Auth
+- Supabase Storage
+
+### Payment
+
+- Midtrans (sandbox)
+
+### Additional
+
+- Resend (email notifications)
+- Vercel (deployment)
+
+---
+
+## 🎨 Design Inspiration
+
+- All Birds → Minimalis design
+
+---
+
+## 🎯 Features
+
+### 👤 Customer
+
+- Authentication (login/register)
+- Browse & search products
+- Product detail + real-time stock
+- Shopping cart (persisted)
+- Checkout + payment integration
+- Order tracking (real-time)
+- Email notification
+
+### 🛠️ Admin
+
+- Dashboard (orders, revenue, stock)
+- CRUD products + image upload
+- Manage orders & update status
+- Low stock alert (via email)
+
+### ⚙️ Technical
+
+- Real-time stock updates
+- Real-time order status
+- Payment webhook handling
+- Mobile responsive
+- Production deployment
+
+---
+
+## ⚡ Critical Highlights
+
+- 🔥 Real-time synchronization (WebSocket)
+- 💳 Payment gateway integration
+- 📦 Full e-commerce flow
+- 🚀 Production-ready architecture
+
+---
+
+## 🛠️ Setup
+
+```bash
+git clone https://github.com/fakhri-muzakki/supreme-watch.git
+cd supreme-watch
+npm install
+```
+
+### Environment Variables
+
+```env
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NODE_ENV="development"
+ADMIN_EMAIL=youremail@gmail.com
+# DATABASE_URL=
+
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+
+# Midtrans
+MIDTRANS_APP_URL="https://app.sandbox.midtrans.com"
+MIDTRANS_API_URL="https://api.sandbox.midtrans.com"
+
+MIDTRANS_SERVER_KEY=
+NEXT_PUBLIC_MIDTRANS_CLIENT_KEY=
+MIDTRANS_IS_PRODUCTION=false
+
+# Resend
+RESEND_API_KEY=
+EMAIL_FROM=Supreme Watch <onboarding@resend.dev>
+# EMAIL_FROM=Supreme Watch <fakhrimuzakki119@gmail.com>
+```
+
+### Run
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Deploy ke:
 
-## Learn More
+- Vercel (Frontend)
+- Supabase (Backend)
+- Midtrans (Sandbox)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📌 Portfolio Description
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> Full-stack e-commerce with real-time inventory updates, secure payment integration (Midtrans), and admin dashboard. Built in 5 days using Next.js & Supabase.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🙌 Author
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Fakhri Muzakki

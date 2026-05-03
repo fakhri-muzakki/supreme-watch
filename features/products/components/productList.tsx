@@ -2,12 +2,12 @@
 
 import { useQueryState } from "nuqs";
 import { useProducts } from "../hooks/useProducts";
-import ProductCard from "./productCard";
+import ProductCard from "./ProductCard";
 import { useEffect, useRef } from "react";
 import type { Product } from "@/types/product";
-import ProductFilters from "./productFilters";
+import ProductFilters from "./ProductFilters";
 
-export default function ProductList() {
+const ProductList = () => {
   const [search] = useQueryState("search");
   const [category] = useQueryState("category");
   const [sort] = useQueryState("sort");
@@ -51,4 +51,6 @@ export default function ProductList() {
       </div>
     </>
   );
-}
+};
+
+export default ProductList;
