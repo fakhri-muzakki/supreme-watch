@@ -74,7 +74,11 @@ export default function CheckoutForm() {
 
           {/* FULL NAME */}
           <div className="space-y-1">
-            <Input placeholder="Full Name" {...register("customer_name")} />
+            <Input
+              placeholder="Full Name"
+              autoComplete="off"
+              {...register("customer_name")}
+            />
             {errors.customer_name && (
               <p className="text-sm text-destructive">
                 {errors.customer_name.message}
@@ -84,7 +88,11 @@ export default function CheckoutForm() {
 
           {/* EMAIL */}
           <div className="space-y-1">
-            <Input placeholder="Email" {...register("customer_email")} />
+            <Input
+              placeholder="Email"
+              autoComplete="off"
+              {...register("customer_email")}
+            />
             {errors.customer_email && (
               <p className="text-sm text-destructive">
                 {errors.customer_email.message}
@@ -94,7 +102,11 @@ export default function CheckoutForm() {
 
           {/* PHONE */}
           <div className="space-y-1">
-            <Input placeholder="Phone" {...register("customer_phone")} />
+            <Input
+              placeholder="Phone"
+              autoComplete="off"
+              {...register("customer_phone")}
+            />
             {errors.customer_phone && (
               <p className="text-sm text-destructive">
                 {errors.customer_phone.message}

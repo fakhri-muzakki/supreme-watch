@@ -52,6 +52,7 @@ const LoginForm = () => {
         <Input
           id="email"
           type="email"
+          autoComplete="off"
           placeholder="you@example.com"
           {...register("email")}
         />
@@ -67,6 +68,7 @@ const LoginForm = () => {
             id="password"
             type={showPassword ? "text" : "password"}
             placeholder="••••••••"
+            autoComplete="off"
             className="pr-10"
             {...register("password")}
           />

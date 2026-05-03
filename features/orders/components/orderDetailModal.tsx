@@ -71,9 +71,11 @@ export default function OrderDetailModal({
             <strong>Address:</strong> {order.shipping_address}
           </p>
         </div>
-        <Button className="w-full" onClick={handlePay}>
-          Pay
-        </Button>
+        {order.status === "pending" && (
+          <Button className="w-full" onClick={handlePay}>
+            Pay
+          </Button>
+        )}
       </DialogContent>
     </Dialog>
   );

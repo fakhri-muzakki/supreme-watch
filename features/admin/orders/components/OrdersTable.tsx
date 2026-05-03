@@ -14,6 +14,7 @@ import DeleteOrderDialog from "./DeleteOrderDialog";
 import OrderStatusModal from "./OrderStatusModal";
 import type { Order, SortOrder } from "../order";
 import OrdersToolBar from "./OrdersToolBar";
+import Link from "next/link";
 
 export default function OrdersTable() {
   const [page, setPage] = useState(1);
@@ -76,6 +77,7 @@ export default function OrdersTable() {
 
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem
+                        className="cursor-pointer"
                         onClick={() => {
                           setSelected(order);
                           setOpen(true);
@@ -84,16 +86,19 @@ export default function OrdersTable() {
                         Update
                       </DropdownMenuItem>
 
-                      <DropdownMenuItem
-                        onClick={() => {
-                          console.log("detail", order.id);
-                        }}
-                      >
-                        Detail
+                      <DropdownMenuItem>
+                        <Link
+                          href={`/admin/orders/${order.id}`}
+                          prefetch={false}
+                          scroll={true}
+                          className=""
+                        >
+                          Detail
+                        </Link>
                       </DropdownMenuItem>
 
                       <DropdownMenuItem
-                        className="text-red-500"
+                        className="text-red-500 cursor-pointer"
                         onClick={() => {
                           setSelected(order);
                           setDeleteOpen(true);

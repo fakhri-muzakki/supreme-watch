@@ -50,6 +50,7 @@ const CategoryForm = ({
         <label className="text-sm font-medium">Name</label>
         <Input
           placeholder="Category name"
+          autoComplete="off"
           {...register("name")}
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -64,6 +65,8 @@ const CategoryForm = ({
         <label className="text-sm font-medium">Slug</label>
         <Input
           placeholder="category-slug"
+          autoComplete="off"
+          readOnly
           value={name.toLowerCase().replace(/\s+/g, "-")}
           {...register("slug")}
         />

@@ -114,10 +114,13 @@ export default function ProductDialog({ open, onClose, product }: Props) {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* NAME */}
-          {/* NAME */}
           <div>
             <label className="text-sm font-medium">Product Name</label>
-            <Input placeholder="Product Name" {...register("name")} />
+            <Input
+              placeholder="Product Name"
+              autoComplete="off"
+              {...register("name")}
+            />
             {errors.name && (
               <p className="text-sm text-destructive">{errors.name.message}</p>
             )}

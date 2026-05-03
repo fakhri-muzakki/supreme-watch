@@ -43,6 +43,7 @@ const RegisterForm = () => {
         <Label htmlFor="full_name">Full Name</Label>
         <Input
           id="full_name"
+          autoComplete="off"
           placeholder="Your full name"
           {...register("full_name")}
         />
@@ -56,6 +57,7 @@ const RegisterForm = () => {
         <Input
           id="email"
           type="email"
+          autoComplete="off"
           placeholder="you@example.com"
           {...register("email")}
         />
@@ -71,6 +73,7 @@ const RegisterForm = () => {
             id="password"
             type={showPassword ? "text" : "password"}
             placeholder="••••••••"
+            autoComplete="off"
             className="pr-10"
             {...register("password")}
           />
